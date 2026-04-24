@@ -31,7 +31,7 @@ public static partial class PerfilEndPoints
              .WithResponses(StatusCodes.Status204NoContent)
              .WithDescription("Eliminar una Perfil");
 
-        g.MapPatch("/UpdateState", UpdateStateAsync)
+        g.MapPatch("/state", UpdateStateAsync)
               .WithResponsesValue<int>(StatusCodes.Status200OK)
              .WithDescription("Activar o desactivar un Perfil");
 
@@ -39,8 +39,7 @@ public static partial class PerfilEndPoints
              .WithResponses<PerfilModel>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)
             .WithDescription("Obtener un Perfil por defecto");
-
-        //"/empresa/{coEmpresa:int}/perfil/{coPerfil:int}
+                
         g.MapGet("/byid", SelByIdAsync)
             .WithResponses<PerfilModel>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)

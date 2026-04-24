@@ -16,7 +16,7 @@ public record PaisFilter : BaseFilterDto   { }
 /// <summary>
 /// Entidad que representa la tabla "trfpais".
 /// </summary>
-public class PaisModel
+public partial class PaisModel
 {
   public string NoPais { get; set; }
   public string NoCodigoIso2 { get; set; }
@@ -24,4 +24,9 @@ public class PaisModel
   public string NoPrefijoTelefono { get; set; }
   public int CoPais { get; set; }
   public int? CoMoneda { get; set; }
+}
+
+public partial class PaisModel
+{
+    public MonedaModel Moneda { get; set; }    
 }

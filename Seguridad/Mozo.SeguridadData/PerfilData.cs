@@ -84,6 +84,7 @@ public partial class PerfilData : IPerfilData
 
         string sql = $@"CALL {_schema}.usp_perfil_update_state(
             @CoModulo,
+            @CoPerfil,
             @FlEstReg,
             @CoUsuMod
         )";
@@ -92,10 +93,10 @@ public partial class PerfilData : IPerfilData
     public async Task DeleteByIdAsync(PerfilFilterDto c)
     {
         DynamicParameters pr = new();
-        pr.Add2("CoModulo", c.CoModulo, DbType.Int32);
+        pr.Add2("CoPerfil", c.CoPerfil, DbType.Int32);
         pr.Add2("CoUsuEli", _user.CoPersona, DbType.Int32);
 
-        string sql = $"CALL {_schema}.usp_perfil_delete_by_id(@CoModulo,@CoUsuEli)";
+        string sql = $"CALL {_schema}.usp_perfil_delete_by_id(@CoPerfil,@CoUsuEli)";
         await _connection.ExecuteScalarAsync(sql, pr);
     }
     public async Task<IEnumerable<PerfilModel>> SelAllAsync(PerfilFilterDto c)

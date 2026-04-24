@@ -223,15 +223,11 @@ app.MapWithAutoTag("/catalogo/producto-precio", typeof(Mozo.Api.Catalogo.Product
 app.MapWithAutoTag("/catalogo/producto-stock", typeof(Mozo.Api.Catalogo.ProductoStockEndPoints), g => Mozo.Api.Catalogo.ProductoStockEndPoints.MapProductoStock(g));
 
 
-app.MapWithAutoTag("/seguridad/empresa", typeof(Mozo.Api.Seguridad.EmpresaEndPoints), g => Mozo.Api.Seguridad.EmpresaEndPoints.MapEmpresa(g));
-app.MapWithAutoTag("/seguridad/empresa-modulo", typeof(Mozo.Api.Seguridad.EmpresaModuloEndPoints), g => Mozo.Api.Seguridad.EmpresaModuloEndPoints.MapEmpresaModulo(g));
-app.MapWithAutoTag("/seguridad/menu", typeof(Mozo.Api.Seguridad.MenuEndPoints), g => Mozo.Api.Seguridad.MenuEndPoints.MapMenu(g));
 
+app.MapWithAutoTag("/seguridad/empresa-modulo", typeof(Mozo.Api.Seguridad.EmpresaModuloEndPoints), g => Mozo.Api.Seguridad.EmpresaModuloEndPoints.MapEmpresaModulo(g));
 app.MapWithAutoTag("/seguridad/modulo-usuario", typeof(Mozo.Api.Seguridad.ModuloUsuarioEndPoints), g => Mozo.Api.Seguridad.ModuloUsuarioEndPoints.MapModuloUsuario(g));
-app.MapWithAutoTag("/seguridad/pagina", typeof(Mozo.Api.Seguridad.PaginaEndPoints), g => Mozo.Api.Seguridad.PaginaEndPoints.MapPagina(g));
 
 app.MapWithAutoTag("/seguridad/permiso", typeof(Mozo.Api.Seguridad.PermisoEndPoints), g => Mozo.Api.Seguridad.PermisoEndPoints.MapPermiso(g));
-app.MapWithAutoTag("/seguridad/perfil-pagina", typeof(Mozo.Api.Seguridad.PerfilPaginaEndPoints), g => Mozo.Api.Seguridad.PerfilPaginaEndPoints.MapPerfilPagina(g));
 
 
 app.MapWithAutoTag("/login/empresa", typeof(Mozo.Api.Login.EmpresaEndPoints), g => Mozo.Api.Login.EmpresaEndPoints.MapEmpresa(g));
@@ -260,9 +256,18 @@ app.MapWithAutoTag("/login/permiso", typeof(Mozo.Api.Login.PermisoEndPoints), g 
 app.MapWithAutoTag("/login/menu", typeof(Mozo.Api.Login.MenuEndPoints), g => Mozo.Api.Login.MenuEndPoints.MapMenu(g));
 
 
-app.MapWithAutoTag("/seguridad/modulo", typeof(Mozo.Api.Seguridad.ModuloEndPoints), g => Mozo.Api.Seguridad.ModuloEndPoints.MapModulo(g));
+app.MapWithAutoTag("/maestro/pais", typeof(Mozo.Api.Maestro.PaisEndPoints), g => Mozo.Api.Maestro.PaisEndPoints.MapPais(g));
+app.MapWithAutoTag("/maestro/documento-identidad", typeof(Mozo.Api.Maestro.DocumentoIdentidadEndPoints), g => Mozo.Api.Maestro.DocumentoIdentidadEndPoints.MapDocumentoIdentidad(g));
 
+
+app.MapWithAutoTag("/seguridad/modulo", typeof(Mozo.Api.Seguridad.ModuloEndPoints), g => Mozo.Api.Seguridad.ModuloEndPoints.MapModulo(g));
 app.MapWithAutoTag("/seguridad/perfil", typeof(Mozo.Api.Seguridad.PerfilEndPoints), g => Mozo.Api.Seguridad.PerfilEndPoints.MapPerfil(g));
+app.MapWithAutoTag("/seguridad/menu", typeof(Mozo.Api.Seguridad.MenuEndPoints), g => Mozo.Api.Seguridad.MenuEndPoints.MapMenu(g));
+app.MapWithAutoTag("/seguridad/pagina", typeof(Mozo.Api.Seguridad.PaginaEndPoints), g => Mozo.Api.Seguridad.PaginaEndPoints.MapPagina(g));
+app.MapWithAutoTag("/seguridad/perfil-pagina", typeof(Mozo.Api.Seguridad.PerfilPaginaEndPoints), g => Mozo.Api.Seguridad.PerfilPaginaEndPoints.MapPerfilPagina(g));
+app.MapWithAutoTag("/seguridad/empresa", typeof(Mozo.Api.Seguridad.EmpresaEndPoints), g => Mozo.Api.Seguridad.EmpresaEndPoints.MapEmpresa(g));
+
+
 
 
 app.Run();

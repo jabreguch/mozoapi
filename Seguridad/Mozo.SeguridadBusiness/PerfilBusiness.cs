@@ -25,8 +25,16 @@ public class PerfilBusiness : IPerfilBusiness
     public async Task UpdateAsync(PerfilModel c) => await _data.UpdateAsync(c);
     public async Task UpdateStateAsync(PerfilModel c) => await _data.UpdateStateAsync(c);
     public async Task DeleteByIdAsync(PerfilFilterDto c) => await _data.DeleteByIdAsync(c);
-    public async Task<IEnumerable<PerfilModel>> SelAllAsync(PerfilFilterDto c) => await _data.SelAllAsync(c);
-    public async Task<IEnumerable<PerfilModel>> SelAllActiveAsync(PerfilFilterDto c) => await _data.SelAllActiveAsync(c);
+    public async Task<IEnumerable<PerfilModel>> SelAllAsync(PerfilFilterDto c)
+    {
+        var r = await _data.SelAllAsync(c);
+        return r.OrderBy(x => x.NoPerfil);
+    }
+    public async Task<IEnumerable<PerfilModel>> SelAllActiveAsync(PerfilFilterDto c)
+    {
+        var r = await _data.SelAllActiveAsync(c);
+        return r.OrderBy(x => x.NoPerfil);
+    }
     public async Task<PerfilModel?> SelByIdAsync(PerfilFilterDto c) => await _data.SelByIdAsync(c);
     public async Task<PerfilModel?> SelDefaultAsync(PerfilFilterDto c) => await _data.SelDefaultAsync(c);
 }

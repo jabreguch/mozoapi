@@ -32,6 +32,12 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITipoGeneralData, TipoGeneralData>();
         services.AddScoped<ITipoGeneralBusiness, TipoGeneralBusiness>();
 
+        services.AddScoped<IPaisData, PaisData>();
+        services.AddScoped<IPaisBusiness, PaisBusiness>();
+
+        services.AddScoped<IDocumentoIdentidadData, DocumentoIdentidadData>();
+        services.AddScoped<IDocumentoIdentidadBusiness, DocumentoIdentidadBusiness>();
+
         //services.AddScoped<IUbigeoData, UbigeoData>();
         //services.AddScoped<IUbigeoBusiness, UbigeoBusiness>();
 

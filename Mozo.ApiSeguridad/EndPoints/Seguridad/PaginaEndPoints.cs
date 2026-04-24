@@ -65,7 +65,7 @@ public partial class PaginaEndPoints
       )
     {
 
-        await IPagina.UpdateAsync(new());
+        await IPagina.UpdateAsync(m);
         return Results.Ok(m.CoPagina);
     }
 

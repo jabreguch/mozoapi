@@ -53,8 +53,7 @@ public partial class PaginaData : IPaginaData
         pr.Add2("NoOpcion", c.NoOpcion, DbType.String);
         pr.Add2("NuOrden", c.NuOrden, DbType.Int32);
         pr.Add2("CoTipoPagina", c.CoTipoPagina, DbType.Int32);
-        pr.Add2("TxDescripcion", c.TxDescripcion, DbType.String);
-        pr.Add2("NoParametro", c.NoParametro, DbType.String);
+        pr.Add2("TxDescripcion", c.TxDescripcion, DbType.String);      
         pr.Add2("NoControlador", c.NoControlador, DbType.String);
         pr.Add2("NoAccion", c.NoAccion, DbType.String);
         pr.Add2("CoUsuCre", _user.CoPersona, DbType.Int32);
@@ -67,8 +66,7 @@ public partial class PaginaData : IPaginaData
                @NoOpcion,
                @NuOrden,
                @CoTipoPagina,
-               @TxDescripcion,
-               @NoParametro,
+               @TxDescripcion,               
                @NoControlador,
                @NoAccion,
                @CoUsuCre
@@ -82,8 +80,7 @@ public partial class PaginaData : IPaginaData
         pr.Add2("CoArea", c.CoArea, DbType.Int32);
         pr.Add2("NoOpcion", c.NoOpcion, DbType.String);
         pr.Add2("NuOrden", c.NuOrden, DbType.Int32);
-        pr.Add2("TxDescripcion", c.TxDescripcion, DbType.String);
-        pr.Add2("NoParametro", c.NoParametro, DbType.String);
+        pr.Add2("TxDescripcion", c.TxDescripcion, DbType.String);       
         pr.Add2("NoControlador", c.NoControlador, DbType.String);
         pr.Add2("NoAccion", c.NoAccion, DbType.String);
         pr.Add2("CoUsuMod", _user.CoPersona, DbType.Int32);
@@ -93,8 +90,7 @@ public partial class PaginaData : IPaginaData
                @CoArea,            
                @NoOpcion,
                @NuOrden,               
-               @TxDescripcion,
-               @NoParametro,
+               @TxDescripcion,              
                @NoControlador,
                @NoAccion,
                @CoUsuMod

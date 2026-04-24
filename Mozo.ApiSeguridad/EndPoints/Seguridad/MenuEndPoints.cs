@@ -113,7 +113,7 @@ public partial class MenuEndPoints
              )
     {
 
-        return Results.Ok(await MenuSeguridad.SelAllArbolAsync(new(), IMenu, IPagina));
+        return Results.Ok(await MenuSeguridad.SelAllArbolAsync(f, IMenu, IPagina));
     }
 
 }

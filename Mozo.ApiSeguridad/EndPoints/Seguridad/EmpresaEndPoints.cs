@@ -33,7 +33,7 @@ public static partial class EmpresaEndPoints
              .WithResponsesValue<int>(StatusCodes.Status200OK)
              .WithDescription("Activar o desactivar una Empresa");
 
-        g.MapDelete("/", DeleteByIdAsync)
+        g.MapDelete("/byid", DeleteByIdAsync)
             .WithResponses(StatusCodes.Status204NoContent)
              .WithDescription("Eliminar una Empresa");
 

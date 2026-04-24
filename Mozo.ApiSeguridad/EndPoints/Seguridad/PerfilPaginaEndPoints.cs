@@ -24,7 +24,7 @@ public static partial class PerfilPaginaEndPoints
              .WithDescription("Insertar una PerfilPagina");
 
         g.MapGet("/", SelAllAsync)
-            .WithResponses<IEnumerable<EmpresaModel>>(StatusCodes.Status200OK)
+            .WithResponses<IEnumerable<MenuModel>>(StatusCodes.Status200OK)
             .WithDescription("Obtener todas los PerfilPagina");
 
         return g;
@@ -41,11 +41,11 @@ public partial class PerfilPaginaEndPoints
               IPerfilPaginaBusiness IPerfilPagina
           )
     {
-
+        await IPerfilPagina.DeleteByModuloAndPerfilAsync(new() { CoModulo = m.CoModulo, CoPerfil = m.CoPerfil });
         foreach (PerfilPaginaModel item in m.PerfilPaginaLst ?? new())
         {
-            //item.CoEmpresa = m.CoEmpresa;
-            //item.CoUsuCre = m.CoUsuCre;
+            item.CoModulo = m.CoModulo;
+            item.CoPerfil = m.CoPerfil;
             await IPerfilPagina.InsertAsync(item);
         }
         return TypedResults.Created($"/{m.CoPerfil}", m.CoPerfil);
@@ -59,11 +59,11 @@ public partial class PerfilPaginaEndPoints
             IPerfilPaginaBusiness IPerfilPagina
      )
     {
-        PerfilPaginaModel m = new();
-        List<MenuModel> MenuLst = (await MenuSeguridad.SelAllArbolAsync(new() { CoModulo = m.CoModulo, FlEstReg = 1 }, IMenu, IPagina)) ?? new();
+        
+        List<MenuModel> MenuLst = (await MenuSeguridad.SelAllArbolAsync(new() { CoModulo = f.CoModulo, FlEstReg = 1 }, IMenu, IPagina)) ?? new();
 
 
-        List<PerfilPaginaModel> PrivilegioPerfilLst = (await IPerfilPagina.SelAllAsync(new() { CoModulo = m.CoModulo, CoPerfil = m.CoPerfil })).ToList();
+        List<PerfilPaginaModel> PrivilegioPerfilLst = (await IPerfilPagina.SelAllAsync(new() { CoModulo = f.CoModulo, CoPerfil = f.CoPerfil })).ToList();
 
         PerfilPaginaModel? tmp = null;
 
@@ -84,7 +84,7 @@ public partial class PerfilPaginaEndPoints
                     Pagina.FlEstReg = 1;
                 else
                     Pagina.FlEstReg = 0;
-
+                /*
                 foreach (PaginaFlotanteModel Flotante in Pagina.PaginaFlotanteLst ?? new())
                 {
                     tmp = PrivilegioPerfilLst.FirstOrDefault(x => x.CoModulo == Flotante.CoModulo && x.CoMenu == Flotante.CoMenu && x.CoPagina == Flotante.CoPagina);
@@ -93,6 +93,7 @@ public partial class PerfilPaginaEndPoints
                     else
                         Flotante.FlEstReg = 0;
                 }
+                */
 
                 //foreach (ServicioWebModel WebService in Pagina.ServicioWebLst ?? new())
                 //{
@@ -104,13 +105,13 @@ public partial class PerfilPaginaEndPoints
                 //}
 
 
-                foreach (SubPaginaModel SubPagina in Pagina.SubPaginaLst ?? new())
-                {
-                    tmp = PrivilegioPerfilLst.FirstOrDefault(x => x.CoModulo == SubPagina.CoModulo && x.CoMenu == SubPagina.CoMenu && x.CoPagina == SubPagina.CoPagina);
-                    if (tmp != null)
-                        SubPagina.FlEstReg = 1;
-                    else
-                        SubPagina.FlEstReg = 0;
+                //foreach (SubPaginaModel SubPagina in Pagina.SubPaginaLst ?? new())
+                //{
+                //    tmp = PrivilegioPerfilLst.FirstOrDefault(x => x.CoModulo == SubPagina.CoModulo && x.CoMenu == SubPagina.CoMenu && x.CoPagina == SubPagina.CoPagina);
+                //    if (tmp != null)
+                //        SubPagina.FlEstReg = 1;
+                //    else
+                //        SubPagina.FlEstReg = 0;
 
 
                     //foreach (PaginaFlotanteModel Flotante in SubPagina.PaginaFlotanteLst ?? new())
@@ -136,7 +137,7 @@ public partial class PerfilPaginaEndPoints
                     //    else
                     //        WebService.CoEstReg = 0;
                     //}
-                }
+                //}
             }
         }
         return TypedResults.Ok(MenuLst);

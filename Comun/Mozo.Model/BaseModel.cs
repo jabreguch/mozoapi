@@ -7,5 +7,9 @@ public class BaseModel
     public int? CoUsuCre { get; set; }
     public int? CoUsuEli { get; set; }
 
+    public int? RowsCount { get; set; }
+
+    
+
 }
 
