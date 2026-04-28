@@ -7,8 +7,10 @@ public interface IEmpresaModuloBusiness
 {
     Task<int> InsertAsync(EmpresaModuloModel c);
     Task UpdateAsync(EmpresaModuloModel c);
-    Task<IEnumerable<EmpresaModuloModel>> SelAllAsync(EmpresaModuloFilterDto c);
-    Task<IEnumerable<EmpresaModuloModel>> SelAllActiveAsync(EmpresaModuloFilterDto c);
+    Task DeleteByIdAsync(EmpresaModuloFilterDto c);
+
+    Task<EmpresaModuloModel?> SelByIdAsync(EmpresaModuloFilterDto c);
+    Task<IEnumerable<EmpresaModuloModel>> SelAllAsync(EmpresaModuloFilterDto c);    
 }
 public class EmpresaModuloBusiness : IEmpresaModuloBusiness
 {
@@ -20,14 +22,15 @@ public class EmpresaModuloBusiness : IEmpresaModuloBusiness
 
     public async Task<int> InsertAsync(EmpresaModuloModel c) => await _data.InsertAsync(c);
     public async Task UpdateAsync(EmpresaModuloModel c) => await _data.UpdateAsync(c);
+
+    public async Task DeleteByIdAsync(EmpresaModuloFilterDto c) => await _data.DeleteByIdAsync(c);
+
+    public async Task<EmpresaModuloModel?> SelByIdAsync(EmpresaModuloFilterDto c) => await _data.SelByIdAsync(c);
+
     public async Task<IEnumerable<EmpresaModuloModel>> SelAllAsync(EmpresaModuloFilterDto c)
     {
         IEnumerable<EmpresaModuloModel> r = await _data.SelAllAsync(c);
         return r.OrderBy(s => s.NuOrden);
     }
-    public async Task<IEnumerable<EmpresaModuloModel>> SelAllActiveAsync(EmpresaModuloFilterDto c)
-    {
-        IEnumerable<EmpresaModuloModel> r = await _data.SelAllActiveAsync(c);
-        return r.OrderBy(s => s.NuOrden);
-    }
+ 
 }

@@ -27,19 +27,30 @@ public static partial class EmpresaModuloEndPoints
              .WithResponsesValue<int>(StatusCodes.Status200OK)
              .WithDescription("Actualizar una EmpresaModulo");
 
-        g.MapGet("/", SelAllAsync)
-            .WithResponses<EmpresaModuloModel>(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status404NotFound)
-            .WithDescription("Obtener una EmpresaModulo");
+        g.MapDelete("/byid", DeleteByIdAsync)
+          .WithResponses(StatusCodes.Status204NoContent)
+          .WithDescription("Eliminar una EmpresaModulo");
 
-        g.MapGet("/active", SelAllActiveAsync)
-            .WithResponses<IEnumerable<EmpresaModuloModel>>(StatusCodes.Status200OK)
-            .WithDescription("Obtener todas las EmpresaModulo activas");
+        g.MapGet("/byid", SelByIdAsync)
+         .WithResponses<EmpresaModuloModel>(StatusCodes.Status200OK)
+         .Produces(StatusCodes.Status404NotFound)
+         .WithDescription("Obtener una EmpresaModulo");
+
+        g.MapGet("/", SelAllAsync)
+          .WithResponses<IEnumerable<EmpresaModuloModel>>(StatusCodes.Status200OK)
+          .Produces(StatusCodes.Status404NotFound)
+          .WithDescription("Obtener una EmpresaModulo");
+
+        g.MapGet("/", SelAllAsync)
+          .WithResponses<IEnumerable<EmpresaModuloModel>>(StatusCodes.Status200OK)
+          .Produces(StatusCodes.Status404NotFound)
+          .WithDescription("Obtener una EmpresaModulo");
 
         return g;
     }
 
 }
+
 public static partial class EmpresaModuloEndPoints
 {
     private static async Task<IResult>
@@ -64,15 +75,27 @@ public static partial class EmpresaModuloEndPoints
     }
 
 
-    static async Task<IResult>
-        SelAllActiveAsync(
-              [AsParameters] EmpresaModuloFilterDto f,
-            IEmpresaModuloBusiness IEmpresaModulo
-    )
+    private static async Task<IResult>
+         DeleteByIdAsync(
+             [AsParameters] EmpresaModuloFilterDto f,
+               IEmpresaModuloBusiness IEmpresaModulo
+      )
     {
-        IEnumerable<EmpresaModuloModel> r = await IEmpresaModulo.SelAllActiveAsync(f);
-        r = r.OrderBy(x => x.NuOrden);
-        return Results.Ok(r);
+        await IEmpresaModulo.DeleteByIdAsync(f);
+        return Results.NoContent();
+    }
+
+
+    private static async Task<IResult>
+         SelByIdAsync(
+             [AsParameters] EmpresaModuloFilterDto f,
+           IEmpresaModuloBusiness IEmpresaModulo
+        )
+    {
+        EmpresaModuloModel? i = await IEmpresaModulo.SelByIdAsync(f);
+        if (i is null)
+            return Results.NotFound();
+        return Results.Ok(i);
     }
 
     static async Task<IResult>
@@ -81,11 +104,12 @@ public static partial class EmpresaModuloEndPoints
             IModuloBusiness IModulo,
             IEmpresaModuloBusiness IEmpresaModulo
     )
-    {       
+    {
 
-        IEnumerable<ModuloModel> moduloLst = await IModulo.SelAllActiveAsync();
+        List<ModuloModel> moduloLst = (await IModulo.SelAllActiveAsync()).ToList();
 
-        List<EmpresaModuloModel> empresaModuloLst = (await IEmpresaModulo.SelAllAsync(f)).ToList();
+        List<EmpresaModuloModel> empresaModuloLst  = (await IEmpresaModulo.SelAllAsync(f)).ToList();
+        //return Results.Ok(r);
         foreach (ModuloModel item in moduloLst)
         {
             EmpresaModuloModel? EmpresaModulo = empresaModuloLst.Find(x => x.CoModulo == item.CoModulo);
@@ -95,7 +119,7 @@ public static partial class EmpresaModuloEndPoints
                 item.FlEstReg = 0;
         }
 
-        foreach (ModuloModel item in moduloLst) item.CoEmpresa = f.CoEmpresa;
+        //foreach (ModuloModel item in moduloLst) item.CoEmpresa = f.CoEmpresa;
         return Results.Ok(moduloLst);
 
         //var ModuloCol = _moduloService.GetAllActivo().ToList();
@@ -116,7 +140,24 @@ public static partial class EmpresaModuloEndPoints
         //}
 
         //foreach (var Item in ModuloCol) Item.CoEmpresa = c.CoEmpresa;
-        //return Ok(ModuloCol);
+        //return Results.Ok(ModuloCol);
     }
+
+
+
+    static async Task<IResult>
+       SelAllAsync(
+               [AsParameters] EmpresaModuloFilterDto f,        
+           IEmpresaModuloBusiness IEmpresaModulo
+   )
+    {
+
+        var r = await IEmpresaModulo.SelAllAsync(f);
+        r = r.OrderBy(x => x.NoModuloDescripcion);
+        return Results.Ok(r);
+        
+    }
+
+
 
 }

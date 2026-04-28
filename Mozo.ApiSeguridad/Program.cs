@@ -224,7 +224,7 @@ app.MapWithAutoTag("/catalogo/producto-stock", typeof(Mozo.Api.Catalogo.Producto
 
 
 
-app.MapWithAutoTag("/seguridad/empresa-modulo", typeof(Mozo.Api.Seguridad.EmpresaModuloEndPoints), g => Mozo.Api.Seguridad.EmpresaModuloEndPoints.MapEmpresaModulo(g));
+
 app.MapWithAutoTag("/seguridad/modulo-usuario", typeof(Mozo.Api.Seguridad.ModuloUsuarioEndPoints), g => Mozo.Api.Seguridad.ModuloUsuarioEndPoints.MapModuloUsuario(g));
 
 app.MapWithAutoTag("/seguridad/permiso", typeof(Mozo.Api.Seguridad.PermisoEndPoints), g => Mozo.Api.Seguridad.PermisoEndPoints.MapPermiso(g));
@@ -266,7 +266,7 @@ app.MapWithAutoTag("/seguridad/menu", typeof(Mozo.Api.Seguridad.MenuEndPoints), 
 app.MapWithAutoTag("/seguridad/pagina", typeof(Mozo.Api.Seguridad.PaginaEndPoints), g => Mozo.Api.Seguridad.PaginaEndPoints.MapPagina(g));
 app.MapWithAutoTag("/seguridad/perfil-pagina", typeof(Mozo.Api.Seguridad.PerfilPaginaEndPoints), g => Mozo.Api.Seguridad.PerfilPaginaEndPoints.MapPerfilPagina(g));
 app.MapWithAutoTag("/seguridad/empresa", typeof(Mozo.Api.Seguridad.EmpresaEndPoints), g => Mozo.Api.Seguridad.EmpresaEndPoints.MapEmpresa(g));
-
+app.MapWithAutoTag("/seguridad/empresa-modulo", typeof(Mozo.Api.Seguridad.EmpresaModuloEndPoints), g => Mozo.Api.Seguridad.EmpresaModuloEndPoints.MapEmpresaModulo(g));
 
 
 
